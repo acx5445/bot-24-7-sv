@@ -11,25 +11,25 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (_, res) => res.sendFile(__dirname + "/sdk.html"));
+app.get("/", (_, res) => res.sendFile(__dirname + "/index.html"));
 app.listen(process.env.PORT);
 
 setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.repl.co/`);
+  http.get(`https://node-bot.genosgaming.repl.co`);
 }, 224000);
 
 
-// U CAN ONLY EDIT THIS SECTION!!
+// ¡¡SOLO PUEDES EDITAR ESTA SECCIÓN!! 
 function createBot () {
 const bot = mineflayer.createBot({
-  host: 'iphere.aternos.me', 
-  version: false, // U can replace with 1.16.5 for example, remember to use ', = '1.16.5'
-  username: 'BotName', 
-  port: YourAternosPort, 
+  host: 'IP DE TU SV EJEMPLO = pruebas.aternos.me', 
+  version: false,
+  username: 'line', 
+  port: 11111,//AQUI PONES EL PUERTO DE TU SERVER 
   plugins: [AutoAuth],
-  AutoAuth: 'Passwordhere'
+  AutoAuth: '/register contra'//LA CONTRASEÑA CON QUE QUIERES QUE SE LOGGE EL BOT, NO IMPORTA ESTO.
 })
-/// DONT TOUCH ANYTHING MORE!
+/// ¡NO TOQUES NADA MÁS!
 bot.loadPlugin(pvp)
 bot.loadPlugin(armorManager)
 bot.loadPlugin(pathfinder)
@@ -90,8 +90,7 @@ bot.on('physicTick', () => {
 })
 bot.on('physicTick', () => {
   if (!guardPos) return
-  const filter = e => e.type === 'mob' && e.position.distanceTo(bot.entity.position) < 16 &&
-                      e.mobType !== 'Armor Stand' 
+  const filter = e => e.type === 'mob' && e.position.distanceTo(bot.entity.position) < 16 && e.mobType !== 'Armor Stand' 
   const entity = bot.nearestEntity(filter)
   if (entity) {
     bot.pvp.attack(entity)
@@ -102,13 +101,16 @@ bot.on('chat', (username, message) => {
     const player = bot.players[username]
 
     if (!player) {
-    bot.chat('I will!')
-    guardArea(player.entity.position)
+      bot.chat("I cant see you!")
+      return
     }
 
+    bot.chat('HAYA VOY!!')
+    guardArea(player.entity.position)
   }
+
   if (message === 'stop') {
-    bot.chat('I will stop!')
+    bot.chat('OK')
     stopGuarding()
   }
 })
@@ -119,7 +121,3 @@ bot.on('end', createBot)
 }
 
 createBot()
-
-//// Rembember to sucribe to my channels!
-/// www.youtube.com/c/JinMoriYT
-///www.youtube.com/channel/UC1SR0lQSDfdaSMhmUiaMitg
